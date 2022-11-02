@@ -1,0 +1,1 @@
+export {MOVIE} from './MOVIE';

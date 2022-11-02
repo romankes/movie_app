@@ -1,0 +1,1 @@
+export {MovieIcon} from './MovieIcon';
