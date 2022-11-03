@@ -21,7 +21,6 @@ export enum Fonts {
 type ThemesItem = {
   pallete: Pallete;
   name: ThemesName;
-  statusBarStyle: StatusBarStyle;
   fonts: typeof Fonts;
 };
 
@@ -33,7 +32,6 @@ export const themes: Themes = {
   light: {
     pallete: palletes[ThemesName.LIGHT],
     name: ThemesName.LIGHT,
-    statusBarStyle: 'dark-content',
     fonts: Fonts,
   },
 };
