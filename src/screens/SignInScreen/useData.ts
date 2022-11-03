@@ -17,10 +17,11 @@ export const useData = () => {
     formState: {isValid},
   } = useForm<Auth.ReqSignIn>({
     defaultValues: {
-      email: 'test@test.com',
-      password: '612135',
+      email: '',
+      password: '',
     },
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
   const onSubmit = (data: Auth.ReqSignIn) => {

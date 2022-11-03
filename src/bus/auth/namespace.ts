@@ -17,6 +17,10 @@ export namespace Auth {
   export type ReqSignUp = SignUpForm;
   export type ResSignUp = {
     token: string;
+
+    error: {
+      code: 'EMAIL_NOT_UNIQUE';
+    };
   };
 
   export type ReqUpdateToken = {

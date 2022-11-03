@@ -49,7 +49,7 @@ export const FilledField: FC<TProps> = ({
   return (
     <View style={margins}>
       {!!label && (
-        <Text family="bold" size={14} margin={{bottom: 14}}>
+        <Text family="bold" size={14} margin={{bottom: 8}}>
           {label}
         </Text>
       )}
@@ -68,7 +68,11 @@ export const FilledField: FC<TProps> = ({
         {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
       </View>
       {!errorEmpty && (
-        <Text margin={{top: 4}} family="medium" color="danger">
+        <Text
+          margin={{top: 4, bottom: 4}}
+          style={{height: 16}}
+          family="medium"
+          color="danger">
           {error}
         </Text>
       )}

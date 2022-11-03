@@ -1,11 +1,11 @@
 import {object, ref, string} from 'yup';
 
 export const schema = object({
-  email: string().required('required').email('invalid_email'),
-  password: string().required('required'),
-  username: string().required('required'),
+  email: string().required('Введіть email').email('Невірний email'),
+  password: string().required('Введіть пароль'),
+  name: string().required('Введіть ім`я'),
   confirmPassword: string().oneOf(
     [ref('password'), null],
-    'password_not_match',
+    'Паролі не співпадають',
   ),
 });

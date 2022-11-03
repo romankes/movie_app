@@ -6,12 +6,11 @@ import {AxiosResponse} from 'axios';
 import {Auth} from '../../namespace';
 import {apiAuth} from '../../api';
 import {authActions} from '../../slice';
+import {showToast} from '@/services/toast';
 
 export function* signUp(action: SignUpAsync): SagaIterator {
   try {
     yield put(uiActions.toggleLoader({name: 'sign_up', loading: true}));
-
-    console.log('call');
 
     const response: AxiosResponse<Auth.ResSignUp> = yield call(
       apiAuth.signUp,
@@ -27,6 +26,13 @@ export function* signUp(action: SignUpAsync): SagaIterator {
       ]);
 
       yield take(types.END_UPDATE_TOKEN);
+    } else {
+      if (response.data.error.code === 'EMAIL_NOT_UNIQUE') {
+        showToast({
+          text1: 'Такий користувач уже зареєстрований!',
+          type: 'error',
+        });
+      }
     }
   } catch (e) {
     console.log(`error sign up worker ${e}`);

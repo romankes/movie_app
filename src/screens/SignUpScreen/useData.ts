@@ -3,7 +3,7 @@ import {uiSelectors} from '@/bus/ui';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
-import {schema} from '../SignInScreen/validate';
+import {schema} from './validate';
 
 export const useData = () => {
   const dispatch = useDispatch();
@@ -16,16 +16,13 @@ export const useData = () => {
     formState: {isValid},
   } = useForm<Auth.SignUpForm>({
     defaultValues: {
-      // email: '',
-      // name: '',
-      // password: '',
-      // confirmPassword: '',
-      name: 'test',
-      email: 'test@test.com',
-      password: '612135',
-      confirmPassword: '612135',
+      email: '',
+      name: '',
+      password: '',
+      confirmPassword: '',
     },
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
   const onSubmit = (data: Auth.SignUpForm) => {

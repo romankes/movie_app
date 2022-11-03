@@ -1,6 +1,12 @@
 import {BackArrowIcon, IconButton, Loader, Text} from '@/components';
 import React, {FC, ReactNode} from 'react';
-import {SafeAreaView, ScrollView, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  View,
+} from 'react-native';
 import {useStyles} from './useStyles';
 
 type TProps = {
@@ -39,18 +45,23 @@ export const AuthLayout: FC<TProps> = ({
           </Text>
           {!!hasBack && <View style={{width: 32}} />}
         </View>
-        {isLoading ? (
-          <Loader height={200} />
-        ) : (
-          <ScrollView
-            style={styles.content}
-            keyboardShouldPersistTaps="always"
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={false}>
-            {children}
-          </ScrollView>
-        )}
-        {!isLoading && <View style={styles.footer}>{renderFooter}</View>}
+        <KeyboardAvoidingView
+          style={{flex: 1}}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={70}
+          enabled>
+          {isLoading ? (
+            <Loader height={200} />
+          ) : (
+            <ScrollView
+              style={styles.content}
+              // keyboardShouldPersistTaps="always"
+              showsVerticalScrollIndicator={false}>
+              {children}
+            </ScrollView>
+          )}
+          {!isLoading && <View style={styles.footer}>{renderFooter}</View>}
+        </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
   );

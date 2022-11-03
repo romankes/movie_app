@@ -8,6 +8,7 @@ import {SignInAsync, types} from '../../types';
 
 import {uiActions} from '@/bus/ui';
 import {authActions} from '../../slice';
+import {showToast} from '@/services/toast';
 
 export function* signIn(action: SignInAsync): SagaIterator {
   try {
@@ -27,6 +28,11 @@ export function* signIn(action: SignInAsync): SagaIterator {
       ]);
 
       yield take(types.END_UPDATE_TOKEN);
+    } else {
+      showToast({
+        text1: 'Невірний лоіг або пароль!',
+        type: 'error',
+      });
     }
   } catch (e) {
     console.log(`error sign in worker ${e}`);

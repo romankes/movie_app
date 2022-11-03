@@ -56,7 +56,7 @@ export const ActorField: FC<TProps> = ({
   return (
     <View style={margins}>
       {!!label && (
-        <Text margin={{bottom: 12}} family="bold" size={14}>
+        <Text margin={{bottom: 8}} family="bold" size={14}>
           {label}
         </Text>
       )}
@@ -90,7 +90,11 @@ export const ActorField: FC<TProps> = ({
           </IconButton>
         )}
       </View>
-      <Text margin={{top: 4}} family="medium" color="danger">
+      <Text
+        style={{height: 16}}
+        margin={{top: 4}}
+        family="medium"
+        color="danger">
         {error}
       </Text>
     </View>
