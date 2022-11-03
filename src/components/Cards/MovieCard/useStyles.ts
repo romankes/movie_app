@@ -28,7 +28,11 @@ export const useStyles = () => {
         removeButton: {
           borderRadius: 32,
           borderWidth: 1,
-          borderColor: pallete.text.danger,
+          borderColor: pallete.icon.danger,
+        },
+
+        disabled: {
+          borderColor: pallete.icon.gray,
         },
       }),
     [pallete],

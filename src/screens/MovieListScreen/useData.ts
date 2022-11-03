@@ -1,5 +1,6 @@
 import {Movie, movieActions, movieSelectors} from '@/bus/movie';
 import {useDebounce, useFetch} from '@/hooks';
+import {useIsFocused} from '@react-navigation/native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -14,6 +15,8 @@ export const useData = () => {
   const [value, setValue] = useState('');
 
   const search = useDebounce(value);
+
+  const isFocused = useIsFocused();
 
   const params: Movie.FetchItemsParams = useMemo(() => {
     if (!fields.length) return {};
@@ -57,10 +60,10 @@ export const useData = () => {
   );
 
   useEffect(() => {
-    console.log('call');
-
-    onBootstrap(0);
-  }, [onBootstrap]);
+    if (isFocused) {
+      onBootstrap(0);
+    }
+  }, [onBootstrap, isFocused]);
 
   return {
     isLoading,

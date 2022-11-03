@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 
 import {TouchableOpacity, View} from 'react-native';
 import {Text, IconButton, TrashIcon} from '@/components';
@@ -16,6 +16,20 @@ type TProps = {
 
 export const MovieCard: FC<TProps> = ({movie, onPress, onRemove}) => {
   const {styles} = useStyles();
+
+  const [removing, setIsRemoving] = useState(false);
+
+  useEffect(() => {
+    if (removing) {
+      const timer = setTimeout(() => {
+        setIsRemoving(false);
+      }, 5100);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [removing]);
 
   return (
     <TouchableOpacity
@@ -42,8 +56,17 @@ export const MovieCard: FC<TProps> = ({movie, onPress, onRemove}) => {
           Рік випуску: <Text family="bold">{movie.year}</Text>
         </Text>
 
-        <IconButton size={32} onPress={onRemove} style={styles.removeButton}>
-          <TrashIcon size={18} color="danger" />
+        <IconButton
+          size={32}
+          activeOpacity={removing ? 1 : 0.6}
+          onPress={() => {
+            if (!removing) {
+              onRemove();
+              setIsRemoving(true);
+            }
+          }}
+          style={[styles.removeButton, removing && styles.disabled]}>
+          <TrashIcon size={18} color={removing ? 'gray' : 'danger'} />
         </IconButton>
       </View>
     </TouchableOpacity>

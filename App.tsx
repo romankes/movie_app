@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {InitializeLayout, ThemeLayout} from '@/layouts';
+import {InitializeLayout, ThemeLayout, ToastLayout} from '@/layouts';
 
 import {AppNavigator} from '@/navigation/AppNavigator';
 
@@ -12,6 +12,7 @@ export default () => (
     <ThemeLayout>
       <InitializeLayout>
         <AppNavigator />
+        <ToastLayout />
       </InitializeLayout>
     </ThemeLayout>
   </Provider>

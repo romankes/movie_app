@@ -17,6 +17,7 @@ import {useTheme} from '@/hooks';
 import {EmptyScreen} from '@/screens';
 import {Text} from '@/components';
 import {MovieNavigator} from './MovieNavigator';
+import {showToast} from '@/services/toast';
 
 export type AppStackParamList = {
   [Routes.AUTH_NAVIGATOR]: undefined;
@@ -29,6 +30,13 @@ export const AppNavigator: FC = () => {
   const dispatch = useDispatch();
 
   const logged = useSelector(authSelectors.getLogged);
+
+  useEffect(() => {
+    // showToast({
+    //   text1: 'Test',
+    //   type: 'success',
+    // });
+  }, []);
 
   const {pallete} = useTheme();
   return (

@@ -18,7 +18,7 @@ export const IconButton: FC<TProps> = ({children, size, ...props}) => {
         },
         props.style,
       ]}
-      activeOpacity={0.6}>
+      activeOpacity={props.activeOpacity || 0.6}>
       {children}
     </TouchableOpacity>
   );

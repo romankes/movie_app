@@ -12,6 +12,7 @@ export type Icon = {
   danger: ColorValue;
   light: ColorValue;
   action: ColorValue;
+  gray: ColorValue;
 };
 export type Text = {
   default: ColorValue;
@@ -20,6 +21,7 @@ export type Text = {
   link: ColorValue;
   action: ColorValue;
   light: ColorValue;
+  success: ColorValue;
 };
 
 type Border = {

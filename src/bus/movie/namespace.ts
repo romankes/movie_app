@@ -55,7 +55,12 @@ export namespace Movie {
   export type ReqCreateItem = Omit<Form, 'actors'> & {
     actors: string[];
   };
-  export type ResCreateItem = ResFetchDetail;
+  export type ResCreateItem = ResFetchDetail & {
+    status: number;
+    error: {
+      code: 'MOVIE_EXISTS';
+    };
+  };
 
   export type ReqRemoveItem = {
     id: number;

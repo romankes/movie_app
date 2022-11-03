@@ -7,6 +7,7 @@ import {Movie} from '../../namespace';
 import {apiMovie} from '../../api';
 import {movieActions} from '../../slice';
 import {navigate, Routes} from '@/navigation';
+import {showToast} from '@/services/toast';
 
 export function* createItem(action: CreateItemAsync): SagaIterator {
   try {
@@ -18,8 +19,22 @@ export function* createItem(action: CreateItemAsync): SagaIterator {
     );
     console.log(response.data);
 
-    if (response.data.data) {
+    if (response.data.status) {
       navigate(Routes.MOVIE_DETAIL, {id: response.data.data.id});
+
+      showToast({
+        text1: 'Фільм додано!',
+        type: 'success',
+      });
+    } else {
+      console.log(response.data.error.code);
+
+      if (response.data.error.code === 'MOVIE_EXISTS') {
+        showToast({
+          text1: 'Такий фільм уже додано!',
+          type: 'error',
+        });
+      }
     }
   } catch (e) {
     console.log(`error create movie item worker ${e}`);

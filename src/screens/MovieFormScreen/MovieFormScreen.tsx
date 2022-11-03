@@ -25,91 +25,86 @@ export const MovieFormScreen: FC<TProps> = ({navigation}) => {
   const {control, handleSubmit, isValid, isLoading, onImport} = useData();
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      enabled
-      style={{flex: 1}}>
-      <DetailLayout
-        onBack={navigation.goBack}
-        title="Створення фільму"
-        isLoading={isLoading}
-        renderFooter={
-          <View>
-            <Button disable={!isValid} onPress={handleSubmit}>
-              Створити
-            </Button>
+    <DetailLayout
+      onBack={navigation.goBack}
+      title="Створення фільму"
+      isLoading={isLoading}
+      renderFooter={
+        <View>
+          <Button disable={!isValid} onPress={handleSubmit}>
+            Створити
+          </Button>
 
-            <TouchableOpacity activeOpacity={0.6} onPress={onImport}>
-              <Text
-                color="link"
-                margin={{top: 8, bottom: Platform.OS === 'ios' ? 4 : 8}}
-                align="center">
-                Імпортувати фільми з файлу
-              </Text>
-            </TouchableOpacity>
-          </View>
-        }>
-        <Controller
-          control={control}
-          name="title"
-          render={({field: {onChange, value}, fieldState: {error}}) => (
-            <FilledField
-              value={value}
-              onChangeText={onChange}
-              error={error?.message}
-              placeholder="Casablanca"
-              label="Назва фільма"
-              margin={{top: 12}}
-            />
-          )}
-        />
+          <TouchableOpacity activeOpacity={0.6} onPress={onImport}>
+            <Text
+              color="link"
+              margin={{top: 8, bottom: Platform.OS === 'ios' ? 4 : 8}}
+              align="center">
+              Імпортувати фільми з файлу
+            </Text>
+          </TouchableOpacity>
+        </View>
+      }>
+      <Controller
+        control={control}
+        name="title"
+        render={({field: {onChange, value}, fieldState: {error}}) => (
+          <FilledField
+            value={value}
+            onChangeText={onChange}
+            error={error?.message}
+            placeholder="Casablanca"
+            label="Назва фільма"
+            margin={{top: 12}}
+          />
+        )}
+      />
 
-        <Controller
-          control={control}
-          name="year"
-          render={({field: {onChange, value}, fieldState: {error}}) => (
-            <FilledField
-              value={value.toString()}
-              onChangeText={onChange}
-              error={error?.message}
-              placeholder="1942"
-              label="Рік випуску"
-              keyboardType="decimal-pad"
-            />
-          )}
-        />
+      <Controller
+        control={control}
+        name="year"
+        render={({field: {onChange, value}, fieldState: {error}}) => (
+          <FilledField
+            value={value.toString()}
+            onChangeText={onChange}
+            error={error?.message}
+            placeholder="1942"
+            label="Рік випуску"
+            keyboardType="decimal-pad"
+          />
+        )}
+      />
 
-        <Controller
-          control={control}
-          name="format"
-          render={({field: {onChange, value}, fieldState: {error}}) => (
-            <SelectBox<string>
-              current={value}
-              checker={item => item !== value}
-              data={MOVIE.FORMATS}
-              keyExtractor={item => `format-${item}`}
-              renderCurrent={item => item || 'Оберіть формат'}
-              renderItem={item => item}
-              onChange={onChange}
-              error={error?.message}
-              label="Формат фільму"
-            />
-          )}
-        />
+      <Controller
+        control={control}
+        name="format"
+        render={({field: {onChange, value}, fieldState: {error}}) => (
+          <SelectBox<string>
+            current={value}
+            checker={item => item !== value}
+            data={MOVIE.FORMATS}
+            keyExtractor={item => `format-${item}`}
+            renderCurrent={item => item || 'Оберіть формат'}
+            renderItem={item => item}
+            onChange={onChange}
+            error={error?.message}
+            label="Формат фільму"
+          />
+        )}
+      />
 
-        <Controller
-          control={control}
-          name="actors"
-          render={({field: {onChange, value}, fieldState: {error}}) => (
-            <ActorField
-              actors={value}
-              error={error?.message}
-              label={'Введіть акторів фільму'}
-              onChange={onChange}
-            />
-          )}
-        />
-      </DetailLayout>
-    </KeyboardAvoidingView>
+      <Controller
+        control={control}
+        name="actors"
+        render={({field: {onChange, value}, fieldState: {error}}) => (
+          <ActorField
+            actors={value}
+            error={error?.message}
+            label={'Введіть акторів фільму'}
+            onChange={onChange}
+          />
+        )}
+      />
+    </DetailLayout>
   );
 };

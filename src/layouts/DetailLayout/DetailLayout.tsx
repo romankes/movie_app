@@ -2,6 +2,8 @@ import {BackArrowIcon, IconButton, Loader, Text} from '@/components';
 import React, {FC, ReactNode} from 'react';
 
 import {
+  KeyboardAvoidingView,
+  Platform,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -71,15 +73,22 @@ export const DetailLayout: FC<TProps> = ({
           <View style={{width: 32}} />
         )}
       </View>
-      <ScrollView
-        {...refreshProps}
-        showsVerticalScrollIndicator={false}
-        style={[styles.content, styles.container]}>
-        {isLoading && !refreshing ? <Loader height={200} /> : children}
-      </ScrollView>
-      {renderFooter && (
-        <View style={[styles.footer, styles.container]}>{renderFooter}</View>
-      )}
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        enabled>
+        <ScrollView
+          {...refreshProps}
+          automaticallyAdjustContentInsets
+          automaticallyAdjustKeyboardInsets
+          showsVerticalScrollIndicator={false}
+          style={[styles.content, styles.container]}>
+          {isLoading && !refreshing ? <Loader height={200} /> : children}
+        </ScrollView>
+        {renderFooter && (
+          <View style={[styles.footer, styles.container]}>{renderFooter}</View>
+        )}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

@@ -14,6 +14,7 @@ const pallete: Pallete = {
     action: '#f6d41f',
     link: '#5BA0BF',
     light: '#FCFAFF',
+    success: '#0A9372',
   },
 
   icon: {
@@ -21,6 +22,7 @@ const pallete: Pallete = {
     danger: '#D63333',
     light: '#FCFAFF',
     action: '#f6d41f',
+    gray: '#E3E3E3',
   },
   button: {
     background: {

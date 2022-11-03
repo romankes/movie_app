@@ -7,6 +7,7 @@ import {Movie} from '../../namespace';
 import {apiMovie} from '../../api';
 import {movieActions} from '../../slice';
 import {goBack} from '@/navigation';
+import {showToast} from '@/services/toast';
 
 export function* importItems(action: ImportItemsAsync): SagaIterator {
   try {
@@ -18,11 +19,18 @@ export function* importItems(action: ImportItemsAsync): SagaIterator {
     );
 
     if (response.data.status) {
-      yield put(movieActions.importItems(response.data));
       goBack();
-    }
 
-    delay(100);
+      showToast({
+        text1: 'Фільми імпортовано!',
+        type: 'success',
+      });
+    } else {
+      showToast({
+        text1: 'Щось пішло не так, спробуйте ще раз!',
+        type: 'error',
+      });
+    }
   } catch (e) {
     console.log(`error import movie items worker ${e}`);
   } finally {

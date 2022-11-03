@@ -8,6 +8,7 @@ import {apiMovie} from '../../api';
 import {movieActions} from '../../slice';
 import {movieSelectors} from '../..';
 import {goBack} from '@/navigation';
+import {showToast} from '@/services/toast';
 
 export function* removeItem(action: RemoveItemAsync): SagaIterator {
   try {
@@ -22,9 +23,13 @@ export function* removeItem(action: RemoveItemAsync): SagaIterator {
       const detail: Movie.Detail | null = yield select(
         movieSelectors.getDetail,
       );
+
       yield put(movieActions.removeItem(action.payload.id));
 
-      console.log(detail, action.payload);
+      showToast({
+        text1: 'Фільм видаленно!',
+        type: 'success',
+      });
 
       if (detail?.id === action.payload.id) {
         goBack();
