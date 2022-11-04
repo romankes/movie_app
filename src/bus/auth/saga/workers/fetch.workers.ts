@@ -9,7 +9,7 @@ export function* fetchToken(): SagaIterator {
   try {
     const response: string | null = yield call(apiAuth.fetchToken);
 
-    yield put(authActions.toggleLogged(!response));
+    yield put(authActions.toggleLogged(!!response));
   } catch (e) {
     console.log(`error fetch auth token worker ${e}`);
   } finally {
